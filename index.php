@@ -18,7 +18,25 @@ $di->instanceManager()->setParameters("SON\Db\Connection", array(
     'password' => 123
 ));
 
-$produto = $di->get("SON\Produto");
+$di->instanceManager()->addAlias('conexao1', 'SON\Db\Connection', array(
+    'server' => 'localhost',
+    'dbname' => 'banco1',
+    'user' => 'teste',
+    'password' => 'teste'
+));
+
+$di->instanceManager()->addAlias('conexao2', 'SON\Db\Connection', array(
+    'server' => 'localhost',
+    'dbname' => 'banco2',
+    'user' => 'teste2',
+    'password' => 'teste2'
+));
+
+$conexao2 = $di->get('conexao2');
+
+$di->instanceManager()->addAlias('Produto', 'SON\Produto');
+$produto = $di->get("Produto");
+print_r($conexao2);
 $categoria = $di->get("SON\Categoria");
 $test = $di->get("SON\Test");
 
