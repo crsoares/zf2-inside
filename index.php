@@ -47,5 +47,36 @@ $di->instanceManager()->addTypePreference('SON\Db\Connection', 'conexao1');
 $categoria = $di->get('SON\Categoria', array('db' => 'conexao2'));
 //print_r($categoria);
 
+//$di = new Zend\Di\Di();
+/*$di->configure(new Zend\Di\Config(array(
+    'definition' => array(
+        'class' => array(
+            'SON\Produto' => array(
+                'setCategoria' => array('required' => false)
+            )
+        )
+    )
+)));*/
+
+$di->configure(new Zend\Di\Config(array(
+    'definition' => array(
+        'class' => array(
+            'SON\Produto' => array(
+                'addCategoria' => array(
+                    'categoria' => array('type' => 'SON\CategoriaInterface','required' => true)
+                )
+            )
+        )
+    ),
+    'instance' => array(
+        'SON\Produto' => array(
+            'injections' => array(
+                'SON\Categoria',
+                'SON\Category'
+            )
+        )
+    )
+)));
+
 $produto = $di->get('SON\Produto');
 print_r($produto);

@@ -2,12 +2,12 @@
 
 namespace SON;
 
-class Produto implements CategoriaAwareInterface
+class Produto
 {
     private $categoria;
     
-    public function setCategoria(Categoria $categoria) {
-        $this->categoria = $categoria;
+    public function addCategoria(CategoriaInterface $categoria) {
+        $this->categoria[] = $categoria;
     }
 
 }
