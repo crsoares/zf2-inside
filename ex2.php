@@ -26,7 +26,7 @@ $events = new Zend\EventManager\SharedEventManager();
 //    echo $e->getParam('valor') . '<br>';
 //});
 
-$events->attach('SON\Event\Exemplo', '*', function($e) {
+$events->attach('SON\Event\Exemplo', 'metodo3', function($e) {
     echo $e->getName() . '<br>';
     echo get_class($e->getTarget()) . '<br>';
     echo $e->getParam('valor') . '<br>';
@@ -35,11 +35,11 @@ $events->attach('SON\Event\Exemplo', '*', function($e) {
 //print_r($events->getEvents('SON\Event\Exemplo'));die;
 //print_r($events->getListeners('SON\Event\Exemplo', '*'));
 
-$events->clearListeners('SON\Event\Exemplo');
+//$events->clearListeners('SON\Event\Exemplo');
 
 $exemplo = new SON\Event\Exemplo();
 $exemplo->getEventManager()->setSharedManager($events);
-$exemplo->metodo();
-$exemplo->metodo2();
-$exemplo->teste();
+//$exemplo->metodo();
+$exemplo->metodo3(1);
+//$exemplo->teste();
 

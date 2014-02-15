@@ -49,6 +49,28 @@ class Exemplo implements EventManagerAwareInterface
             array('valor' => 100)
         );
     }
+    
+    public function metodo3($valor)
+    {
+    	$arg = compact('valor');
+    	$results = $this->getEventManager()->triggerUntil(
+			        	__FUNCTION__,
+			    		$this,
+    					$arg,
+			    		function() use($valor) {
+			    			if($valor == 1) {
+			    				return true;
+			    			}
+			    		}
+			    	);
+    	
+    	if($results->stopped()) {
+    		echo "Parou a execução.";
+    		return $results->last();
+    	}
+    	
+    	echo "Execução continuando...";
+    }
 
     public function teste()
     {
