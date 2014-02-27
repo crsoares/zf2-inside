@@ -80,4 +80,22 @@ class Exemplo implements EventManagerAwareInterface
             array('valor' => 'metodo de teste')
         );
     }
+
+    public function multiplosEventos($valor) {
+        $arg = compact('valor');
+
+        $this->getEventManager()->trigger(
+                __FUNCTION__.'.pre',
+                $this,
+                $arg
+            );
+
+        echo "Conteudo do metodo sendo executado <br>";
+
+        $this->getEventManager()->trigger(
+                __FUNCTION__.'.post',
+                $this,
+                array('valor' => 'executou depois')
+            );
+    }
 }

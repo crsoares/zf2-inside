@@ -26,20 +26,33 @@ $events = new Zend\EventManager\SharedEventManager();
 //    echo $e->getParam('valor') . '<br>';
 //});
 
-$events->attach('SON\Event\Exemplo', 'metodo3', function($e) {
-    echo $e->getName() . '<br>';
-    echo get_class($e->getTarget()) . '<br>';
-    echo $e->getParam('valor') . '<br>';
-});
+// $events->attach('SON\Event\Exemplo', 'metodo3', function($e) {
+//     echo $e->getName() . '<br>';
+//     echo get_class($e->getTarget()) . '<br>';
+//     echo $e->getParam('valor') . '<br>';
+// });
+
+// $events->attach('SON\Event\Exemplo', 'multiplosEventos.pre', function($e) {
+// 	echo "Executou pre <br>";
+// }, -1000);
+
+// $events->attach('SON\Event\Exemplo', 'multiplosEventos.post', function($e) {
+// 	echo "Executou post <br>";
+// }, 1000);
 
 //print_r($events->getEvents('SON\Event\Exemplo'));die;
 //print_r($events->getListeners('SON\Event\Exemplo', '*'));
 
 //$events->clearListeners('SON\Event\Exemplo');
-
+$exemploListener = new SON\Event\ExemploListener();
 $exemplo = new SON\Event\Exemplo();
-$exemplo->getEventManager()->setSharedManager($events);
+$exemplo->getEventManager()->attachAggregate($exemploListener);
+// $exemplo->getEventManager()->setSharedManager($events);
 //$exemplo->metodo();
-$exemplo->metodo3(1);
+//$exemplo->metodo3(1);
+$exemplo->multiplosEventos(1);
 //$exemplo->teste();
+
+
+
 
